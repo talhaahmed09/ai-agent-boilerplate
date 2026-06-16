@@ -1,0 +1,137 @@
+<!-- @dsCard group="Foundations" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Tokens</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-10 font-sans">
+
+  <h2 class="text-xl font-bold text-gray-900 mb-8">Design Tokens</h2>
+
+  <!-- Color palette -->
+  <section class="mb-10">
+    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Colour roles</h3>
+    <div class="grid grid-cols-2 gap-3 max-w-lg">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-indigo-600 shadow-sm"></div>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Brand / Primary</p>
+          <p class="text-xs text-gray-500">indigo-600</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-indigo-700 shadow-sm"></div>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Brand hover</p>
+          <p class="text-xs text-gray-500">indigo-700</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-white border border-gray-200 shadow-sm"></div>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Card background</p>
+          <p class="text-xs text-gray-500">white</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-gray-50 border border-gray-200 shadow-sm"></div>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Page background</p>
+          <p class="text-xs text-gray-500">gray-50</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-red-600 shadow-sm"></div>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Danger / Error</p>
+          <p class="text-xs text-gray-500">red-600</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-red-50 border border-red-200 shadow-sm"></div>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Error background</p>
+          <p class="text-xs text-gray-500">red-50</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-gray-900 shadow-sm"></div>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Body text</p>
+          <p class="text-xs text-gray-500">gray-900</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-gray-500 shadow-sm"></div>
+        <div>
+          <p class="text-sm font-medium text-gray-900">Muted text</p>
+          <p class="text-xs text-gray-500">gray-500</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography -->
+  <section class="mb-10">
+    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Typography</h3>
+    <div class="space-y-4 max-w-lg">
+      <div class="flex items-baseline gap-4">
+        <span class="text-2xl font-bold text-gray-900">Page heading</span>
+        <span class="text-xs text-gray-400">text-2xl font-bold</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="text-sm font-medium text-gray-700">Field label</span>
+        <span class="text-xs text-gray-400">text-sm font-medium</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="text-sm text-gray-900">Input text</span>
+        <span class="text-xs text-gray-400">text-sm</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="text-sm text-red-600">Field error</span>
+        <span class="text-xs text-gray-400">text-sm text-red-600</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="text-sm text-gray-500">Muted / helper</span>
+        <span class="text-xs text-gray-400">text-sm text-gray-500</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="text-sm font-medium text-indigo-600 hover:underline cursor-pointer">Link</span>
+        <span class="text-xs text-gray-400">text-sm font-medium text-indigo-600</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card container -->
+  <section class="mb-10">
+    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Card container</h3>
+    <div class="max-w-md bg-white rounded-lg shadow-md px-8 py-6 border border-gray-100">
+      <p class="text-sm text-gray-500">max-w-md · rounded-lg · shadow-md · px-8 py-10</p>
+      <p class="text-xs text-gray-400 mt-1">All auth forms and the dashboard use this container.</p>
+    </div>
+  </section>
+
+  <!-- Spacing -->
+  <section>
+    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Spacing rhythm</h3>
+    <div class="max-w-lg space-y-2">
+      <div class="flex items-center gap-3">
+        <div class="w-2 h-5 bg-indigo-200 rounded"></div>
+        <span class="text-sm text-gray-700">space-y-5 between field groups</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-2 h-6 bg-indigo-300 rounded"></div>
+        <span class="text-sm text-gray-700">mt-6 between form and sign-in link</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-2 h-16 bg-indigo-100 rounded"></div>
+        <span class="text-sm text-gray-700">mt-16 card from viewport top</span>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

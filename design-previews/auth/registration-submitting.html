@@ -1,0 +1,89 @@
+<!-- @dsCard group="Registration" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration — Submitting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+  <div class="max-w-md mx-auto mt-16 px-8 py-10 bg-white rounded-lg shadow-md">
+
+    <h1 class="text-2xl font-bold text-gray-900 mb-6">Create your account</h1>
+
+    <form novalidate class="space-y-5">
+
+      <!-- Email — disabled -->
+      <div class="space-y-1">
+        <label for="email" class="block text-sm font-medium text-gray-700">
+          Email address <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="email" type="email" value="user@example.com" disabled
+          class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm opacity-60 bg-gray-50 cursor-not-allowed"
+        />
+      </div>
+
+      <!-- Password — disabled -->
+      <div class="space-y-1">
+        <label for="password" class="block text-sm font-medium text-gray-700">
+          Password <span class="text-red-500">*</span>
+        </label>
+        <div class="relative opacity-60">
+          <input
+            id="password" type="password" value="hunter2hunter2" disabled
+            class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm pr-10 bg-gray-50 cursor-not-allowed"
+          />
+          <button type="button" disabled aria-label="Show password"
+            class="absolute right-0 inset-y-0 flex items-center pr-3 text-gray-300 cursor-not-allowed">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Confirm — disabled -->
+      <div class="space-y-1">
+        <label for="confirm" class="block text-sm font-medium text-gray-700">
+          Confirm password <span class="text-red-500">*</span>
+        </label>
+        <div class="relative opacity-60">
+          <input
+            id="confirm" type="password" value="hunter2hunter2" disabled
+            class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm pr-10 bg-gray-50 cursor-not-allowed"
+          />
+          <button type="button" disabled aria-label="Show password"
+            class="absolute right-0 inset-y-0 flex items-center pr-3 text-gray-300 cursor-not-allowed">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Submit — loading -->
+      <button type="submit" disabled aria-busy="true"
+        class="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-md text-sm opacity-75 cursor-not-allowed flex items-center justify-center gap-2 mt-2">
+        <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+        </svg>
+        Creating account...
+      </button>
+
+    </form>
+
+    <p class="text-center mt-6 text-sm text-gray-500">
+      Already have an account?
+      <a href="/login" class="font-medium text-indigo-600 hover:underline">Sign in</a>
+    </p>
+
+  </div>
+
+</body>
+</html>

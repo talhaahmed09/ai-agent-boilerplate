@@ -1,0 +1,84 @@
+<!-- @dsCard group="Shared Components" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Error States</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-10 font-sans">
+
+  <h2 class="text-xl font-bold text-gray-900 mb-2">Error States</h2>
+  <p class="text-sm text-gray-500 mb-8">All error patterns used across auth screens. Every error carries <code class="text-xs bg-gray-100 px-1 rounded">role="alert"</code>.</p>
+
+  <div class="max-w-md space-y-8">
+
+    <!-- Form-level error banner -->
+    <div>
+      <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Form-level error banner</p>
+      <p class="text-xs text-gray-400 mb-2">Appears between heading and first field. Used for network errors, 429, 401.</p>
+      <div role="alert" class="text-sm text-red-600 bg-red-50 border border-red-200 rounded p-3">
+        Something went wrong. Please try again.
+      </div>
+      <div role="alert" class="text-sm text-red-600 bg-red-50 border border-red-200 rounded p-3 mt-2">
+        Too many attempts. Please wait a few minutes and try again.
+      </div>
+      <div role="alert" class="text-sm text-red-600 bg-red-50 border border-red-200 rounded p-3 mt-2">
+        Incorrect email or password.
+      </div>
+    </div>
+
+    <!-- Field-level error -->
+    <div>
+      <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Field-level error</p>
+      <p class="text-xs text-gray-400 mb-2">Appears directly below the input. Border turns red.</p>
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-gray-700">Email address <span class="text-red-500">*</span></label>
+        <input type="email" value="notanemail"
+          class="w-full rounded-md border border-red-500 px-3 py-2 text-sm bg-white"
+          aria-describedby="email-err" aria-invalid="true" />
+        <p id="email-err" role="alert" class="mt-1 text-sm text-red-600">Enter a valid email address.</p>
+      </div>
+    </div>
+
+    <!-- Field email taken -->
+    <div>
+      <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Field error — email taken (409)</p>
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-gray-700">Email address <span class="text-red-500">*</span></label>
+        <input type="email" value="existing@example.com"
+          class="w-full rounded-md border border-red-500 px-3 py-2 text-sm bg-white"
+          aria-describedby="email-taken-err" aria-invalid="true" />
+        <p id="email-taken-err" role="alert" class="mt-1 text-sm text-red-600">An account with that email already exists.</p>
+      </div>
+    </div>
+
+    <!-- Button states -->
+    <div>
+      <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Submit button states</p>
+      <div class="space-y-3">
+        <button disabled class="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-md text-sm opacity-50 cursor-not-allowed">
+          Create account
+        </button>
+        <p class="text-xs text-gray-400">Disabled — form invalid</p>
+
+        <button class="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-md text-sm hover:bg-indigo-700">
+          Create account
+        </button>
+        <p class="text-xs text-gray-400">Enabled — form valid</p>
+
+        <button disabled class="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-md text-sm opacity-50 cursor-not-allowed flex items-center justify-center gap-2">
+          <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          Creating account...
+        </button>
+        <p class="text-xs text-gray-400">Loading — request in flight</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
