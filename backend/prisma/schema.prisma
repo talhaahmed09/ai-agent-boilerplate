@@ -1,0 +1,20 @@
+// Documented production schema — NOT wired for this demo (constitution: "Prisma
+// documented, not wired"; spec out-of-scope: real infra). To enable: install
+// @prisma/client + prisma, set DATABASE_URL, run `npx prisma migrate dev`, and
+// swap InMemoryUserRepository -> PrismaUserRepository in src/server.ts.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique // stored normalized (lowercased, trimmed)
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
