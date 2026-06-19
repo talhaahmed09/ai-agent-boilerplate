@@ -5,9 +5,16 @@
  */
 import { buildApp } from './app';
 import { InMemoryUserRepository } from './data/userRepository';
+import { InMemoryProductStore } from './data/productStore';
+import { InMemoryOrderStore } from './data/orderStore';
 
 const port = Number(process.env.PORT ?? 3001);
-const app = buildApp({ users: new InMemoryUserRepository() });
+// demo: in-memory stores for products and orders
+const app = buildApp({
+  users: new InMemoryUserRepository(),
+  products: new InMemoryProductStore(),
+  orders: new InMemoryOrderStore(),
+});
 
 app
   .listen({ port, host: '0.0.0.0' })

@@ -1,18 +1,28 @@
 import { buildApp } from '../app';
 import { InMemoryUserRepository } from '../data/userRepository';
+import { InMemoryProductStore } from '../data/productStore';
+import { InMemoryOrderStore } from '../data/orderStore';
 import { hashPassword } from '../lib/password';
 
 async function appWithUser(email: string, password: string) {
   const users = new InMemoryUserRepository();
   const passwordHash = await hashPassword(password);
   await users.create({ email: email.trim().toLowerCase(), passwordHash });
-  const instance = buildApp({ users });
+  const instance = buildApp({
+    users,
+    products: new InMemoryProductStore(),
+    orders: new InMemoryOrderStore(),
+  });
   await instance.ready();
   return instance;
 }
 
 function freshApp() {
-  const instance = buildApp({ users: new InMemoryUserRepository() });
+  const instance = buildApp({
+    users: new InMemoryUserRepository(),
+    products: new InMemoryProductStore(),
+    orders: new InMemoryOrderStore(),
+  });
   return instance;
 }
 

@@ -9,10 +9,18 @@ import Fastify, { FastifyInstance } from 'fastify';
 import rateLimit from '@fastify/rate-limit';
 import { registerRoutes } from './routes/register';
 import { loginRoutes } from './routes/login';
+import { productsRoutes } from './routes/products';
+import { ordersRoutes } from './routes/orders';
 import { UserRepository } from './data/userRepository';
+import { ProductStore } from './data/productStore';
+import { OrderStore } from './data/orderStore';
 import { ErrorEnvelope } from './lib/errors';
 
-export function buildApp(deps: { users: UserRepository }): FastifyInstance {
+export function buildApp(deps: {
+  users: UserRepository;
+  products: ProductStore;
+  orders: OrderStore;
+}): FastifyInstance {
   const app = Fastify({ logger: false });
 
   // Register rate-limit plugin globally: 10 requests per 15 minutes per IP.
@@ -80,5 +88,8 @@ export function buildApp(deps: { users: UserRepository }): FastifyInstance {
   app.get('/health', async () => ({ status: 'ok' }));
   app.register(registerRoutes, { users: deps.users });
   app.register(loginRoutes, { users: deps.users });
+  // demo: in-memory product catalogue and order store
+  app.register(productsRoutes, { products: deps.products });
+  app.register(ordersRoutes, { products: deps.products, orders: deps.orders });
   return app;
 }

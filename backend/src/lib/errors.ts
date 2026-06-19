@@ -1,16 +1,30 @@
 /**
  * Typed application errors and the single response envelope every route maps to.
  * The envelope shape is the cross-repo contract (see specs/registration/api-contract.md):
- *   { error: { code, message, fieldErrors? } }
+ *   { error: { code, message, fieldErrors?, unavailableItems? } }
  */
 
-export type ErrorCode = 'VALIDATION' | 'EMAIL_TAKEN' | 'INVALID_CREDENTIALS' | 'RATE_LIMIT' | 'INTERNAL';
+export type ErrorCode =
+  | 'VALIDATION'
+  | 'EMAIL_TAKEN'
+  | 'INVALID_CREDENTIALS'
+  | 'RATE_LIMIT'
+  | 'INTERNAL'
+  | 'UNAUTHORIZED'
+  | 'CART_EMPTY'
+  | 'ITEMS_UNAVAILABLE';
+
+export interface UnavailableItem {
+  productId: string;
+  name: string;
+}
 
 export interface ErrorEnvelope {
   error: {
     code: ErrorCode;
     message: string;
     fieldErrors?: Record<string, string>;
+    unavailableItems?: UnavailableItem[];
   };
 }
 
@@ -19,18 +33,21 @@ export class AppError extends Error {
   readonly status: number;
   readonly code: ErrorCode;
   readonly fieldErrors?: Record<string, string>;
+  readonly unavailableItems?: UnavailableItem[];
 
   constructor(
     status: number,
     code: ErrorCode,
     message: string,
     fieldErrors?: Record<string, string>,
+    unavailableItems?: UnavailableItem[],
   ) {
     super(message);
     this.name = 'AppError';
     this.status = status;
     this.code = code;
     this.fieldErrors = fieldErrors;
+    this.unavailableItems = unavailableItems;
   }
 }
 
@@ -50,6 +67,16 @@ export const validation = (
   fieldErrors: Record<string, string>,
 ): AppError => new AppError(400, 'VALIDATION', message, fieldErrors);
 
+// demo: any non-empty Bearer token is accepted as authenticated
+export const unauthorized = (): AppError =>
+  new AppError(401, 'UNAUTHORIZED', 'Authorization header is missing or invalid.');
+
+export const cartEmpty = (): AppError =>
+  new AppError(400, 'CART_EMPTY', 'Your cart is empty.');
+
+export const itemsUnavailable = (items: UnavailableItem[]): AppError =>
+  new AppError(422, 'ITEMS_UNAVAILABLE', 'One or more items are out of stock.', undefined, items);
+
 /** Map any error to the wire envelope. Unknown errors become an opaque 500. */
 export function toEnvelope(err: unknown): { status: number; body: ErrorEnvelope } {
   if (err instanceof AppError) {
@@ -60,6 +87,7 @@ export function toEnvelope(err: unknown): { status: number; body: ErrorEnvelope 
           code: err.code,
           message: err.message,
           ...(err.fieldErrors ? { fieldErrors: err.fieldErrors } : {}),
+          ...(err.unavailableItems ? { unavailableItems: err.unavailableItems } : {}),
         },
       },
     };

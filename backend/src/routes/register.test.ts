@@ -1,8 +1,14 @@
 import { buildApp } from '../app';
 import { InMemoryUserRepository } from '../data/userRepository';
+import { InMemoryProductStore } from '../data/productStore';
+import { InMemoryOrderStore } from '../data/orderStore';
 
 function app() {
-  return buildApp({ users: new InMemoryUserRepository() });
+  return buildApp({
+    users: new InMemoryUserRepository(),
+    products: new InMemoryProductStore(),
+    orders: new InMemoryOrderStore(),
+  });
 }
 
 describe('POST /register', () => {
