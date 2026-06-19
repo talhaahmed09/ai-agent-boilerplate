@@ -7,8 +7,10 @@
 #              stderr is shown to the agent so it can fix them.
 set -uo pipefail
 
-# The hook receives JSON on stdin; pull out the edited file path.
-FILE="$(cat | python3 -c 'import sys,json; print(json.load(sys.stdin).get("tool_input",{}).get("file_path",""))' 2>/dev/null)"
+# The hook receives JSON on stdin; pull out the edited file path. Parsed with node
+# (the project's runtime) rather than python3, which is absent or a no-op stub on
+# Windows and silently disabled this hook.
+FILE="$(cat | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{process.stdout.write((JSON.parse(s).tool_input||{}).file_path||"")}catch(e){process.stdout.write("")}})' 2>/dev/null)"
 
 # Nothing to do for non-JS/TS files (e.g. markdown specs).
 case "$FILE" in

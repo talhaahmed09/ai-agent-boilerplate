@@ -1,0 +1,56 @@
+name: CI
+
+# The deterministic backstop. Re-runs the same gates the local PreToolUse hook
+# enforces (typecheck + tests), plus lint, for both repos — and finishes with the
+# behavioral check that boots the real backend and drives /register over real HTTP.
+# Creator never grades its own work: this runs independently of any agent session.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # --- backend ---
+      - name: backend · install
+        working-directory: backend
+        run: npm ci
+      - name: backend · typecheck
+        working-directory: backend
+        run: npm run typecheck
+      - name: backend · lint
+        working-directory: backend
+        run: npm run lint
+      - name: backend · test
+        working-directory: backend
+        run: npm test
+
+      # --- frontend ---
+      - name: frontend · install
+        working-directory: frontend
+        run: npm ci
+      - name: frontend · typecheck
+        working-directory: frontend
+        run: npm run typecheck
+      - name: frontend · lint
+        working-directory: frontend
+        run: npm run lint
+      - name: frontend · test
+        working-directory: frontend
+        run: npm test
+
+      # --- behavioral capstone: real HTTP against the running server ---
+      - name: backend · build
+        working-directory: backend
+        run: npm run build
+      - name: behavioral · drive the running app
+        run: node specs/registration/behavioral-check.mjs

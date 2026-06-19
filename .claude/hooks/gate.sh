@@ -9,7 +9,10 @@
 # Exit 2 blocks the commit and shows the reason to the agent.
 set -uo pipefail
 
-CMD="$(cat | python3 -c 'import sys,json; print(json.load(sys.stdin).get("tool_input",{}).get("command",""))' 2>/dev/null)"
+# Parse the hook's stdin JSON with node (the project's runtime — present on every
+# machine this repo runs on; avoids a hard dependency on python3, which is absent
+# or a no-op stub on Windows and silently disabled the gate).
+CMD="$(cat | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{process.stdout.write((JSON.parse(s).tool_input||{}).command||"")}catch(e){process.stdout.write("")}})' 2>/dev/null)"
 
 # Only gate commits/pushes. Let all other bash through untouched.
 case "$CMD" in

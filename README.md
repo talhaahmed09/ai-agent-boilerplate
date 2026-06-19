@@ -119,9 +119,11 @@ two-feature demo, and deliberately leaves the rest as *trajectory, not built*:
 | Different model per role | ❌ trajectory | a real bias-reduction lever, noted not built |
 | Running on a hosted Agent SDK process | ❌ trajectory | stays a Claude Code session |
 
-Explicitly out of scope (so the system isn't over-built): real production infra —
-the Prisma adapter, Docker Postgres, and CI actually running in GitHub stay
-**documented but not wired**, exactly as today.
+CI **is** wired: `.github/workflows/ci.yml` re-runs lint + typecheck + tests for
+both repos and the behavioral check on every push/PR — the deterministic backstop
+that holds even outside an agent session. Explicitly out of scope (so the system
+isn't over-built): real production infra — the Prisma adapter and Docker Postgres
+stay **documented but not wired**, exactly as today.
 
 ---
 
@@ -132,8 +134,8 @@ the Prisma adapter, Docker Postgres, and CI actually running in GitHub stay
 + `validation-contract.md` → `mission-state.md` → `handoffs/` (one per milestone)
 → `reports/` (both validators). The feature itself is real and **verified green**:
 
-- **backend/** (Fastify + TS): `tsc --noEmit` clean, `eslint` clean, **13/13 Jest**.
-- **frontend/** (React + RTK + TS): `tsc --noEmit` clean, `eslint` clean, **17/17 Jest**.
+- **backend/** (Fastify + TS): `tsc --noEmit` clean, `eslint` clean, **26/26 Jest**.
+- **frontend/** (React + RTK + TS): `tsc --noEmit` clean, `eslint` clean, **57/57 Jest**.
 - **behavioral:** `node specs/registration/behavioral-check.mjs` boots the real
   backend and drives `/register` over real HTTP — **6/6 contract rows PASS**
   (success, duplicate-email, weak-password, malformed-email, missing-body, and

@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(PORT=3099 node dist/server.js)",
-      "Bash(PORT=3099 node /Users/talha.imtiaz/Documents/dev-workspace/backend/dist/src/server.js)"
-    ]
-  }
-}
