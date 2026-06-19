@@ -84,7 +84,7 @@ export function RegistrationForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="mx-auto max-w-sm space-y-4">
+    <form onSubmit={onSubmit} noValidate className="max-w-md mx-auto mt-16 px-8 py-10 bg-white rounded-lg shadow-md">
       <h1 className="text-xl font-semibold">Create your account</h1>
 
       {formError && (

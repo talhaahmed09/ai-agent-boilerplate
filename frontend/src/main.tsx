@@ -4,6 +4,7 @@
  * session rehydration with no network call). Wraps the app in Redux Provider
  * and BrowserRouter.
  */
+import './index.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';

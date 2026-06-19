@@ -26,7 +26,7 @@ export interface AuthService {
   login(input: RegisterInput): Promise<RegisterResponse>;
 }
 
-const API_BASE = process.env.API_BASE ?? '';
+const API_BASE = import.meta.env.VITE_API_BASE ?? '';
 
 /** Thrown by the service on a non-2xx; carries the unpacked envelope. */
 export class AuthApiError extends Error implements ThunkError {
